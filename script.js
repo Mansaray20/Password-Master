@@ -42,21 +42,55 @@ lowerCase: includeLowerCase,
 
 }
 
-return passwordOptions;
+return includedOptions;
 }
 
-function generateRandomNumber(arr){
+function getRandom(arr){
 var randomIndex = Math.floor(Math.random() * arr.length);
 var ranDomElement = arr[randomIndex];
-return randomElement
+return ranDomElement;
+
 }
+
+function generatePassWord(){
+var options = passwordOptions();
+var result = [];
+var potentialCharacters = [];
+var confirmedCharacters = [];
+
+if(!options) return null;
+if(options.includeSpecial){
+potentialCharacters = potentialCharacters.concact(symbols);
+confirmedCharacters.push(getRandom(symbols));
+  }
+if(options.includeNumbers){
+potentialCharacters = potentialCharacters.concact(numbers);
+confirmedCharacters.push(getRandom(numbers));
+  }
+if(options.includeUpperCase){
+potentialCharacters = potentialCharacters.contact(upperCase);
+confirmedCharacters.push(getRandom(upperCase))
+  }
+if(options.includeLowerCase){
+potentialCharacters = potentialCharacters.concact(lowerCase);
+confirmedCharacters.push(getRandom(lowerCase))
+  }
+for (var i = 0; i < options.length; i++) {
+var potentialCharacters = getRandom(potentialCharacters);
+result.push(potentialCharacters)
+  }
+
+return result.join("")
+}
+
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = generatePassWord();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
